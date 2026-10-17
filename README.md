@@ -17,6 +17,10 @@ see it.
 
 **Nothing gets posted until you say yes.** These skills write. You post.
 
+**¿En español?** Hay una variante completa en [`es/`](es/README.md), con su
+propio léxico, fórmulas de gancho y scripts adaptados: `/plugin install
+instagram-agent-es`.
+
 ## Install
 
 Paste this into Claude:

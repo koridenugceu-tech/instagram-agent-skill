@@ -13,6 +13,13 @@
       "source": "./",
       "category": "productivity",
       "homepage": "https://github.com/Jakeschincariol/instagram-agent-skill"
+    },
+    {
+      "name": "instagram-agent-es",
+      "description": "Variante en español: las mismas trece skills, con fórmulas de gancho, léxico del humanizador y scripts adaptados al español.",
+      "source": "./es",
+      "category": "productivity",
+      "homepage": "https://github.com/Jakeschincariol/instagram-agent-skill"
     }
   ]
 }

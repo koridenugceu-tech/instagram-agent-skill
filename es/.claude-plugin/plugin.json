@@ -1,0 +1,13 @@
+{
+  "name": "instagram-agent-es",
+  "description": "Variante en español de las trece skills que llevan una cuenta de Instagram: Reels con 26 fórmulas de gancho en español, gancho puntuado y escaleta medida por sílabas, investigación de lo que funciona en tu nicho ordenada por múltiplo, captions revisados contra el corte del feed, carruseles, stories, nota del perfil, plan semanal, comentarios, respuestas, DM, reutilización, auditorías y un humanizador con léxico propio del español (concordancia de género y número, calcos del inglés, rayas y comillas angulares).",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jake Schincariol",
+    "url": "https://opusjake.ai"
+  },
+  "homepage": "https://github.com/Jakeschincariol/instagram-agent-skill",
+  "repository": "https://github.com/Jakeschincariol/instagram-agent-skill",
+  "license": "MIT",
+  "keywords": ["instagram", "reels", "español", "spanish", "contenido", "humanizador", "redes sociales", "marketing"]
+}

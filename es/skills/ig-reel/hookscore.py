@@ -9,12 +9,12 @@ se diga en menos de tres segundos, que tenga algo concreto, que haya algo en
 juego, que lo interesante esté delante y no detrás, y que vaya dirigido a
 alguien.
 
-Qué NO es:  un predictor de visualizaciones. La versión inglesa se probó
-contra 74 ganchos reales de vídeo corto: distinguía un gancho real de uno
-escrito a propósito para ser malo (AUC 0,83) y apenas distinguía los éxitos de
-un creador de sus fracasos (AUC 0,56, donde 0,50 es tirar una moneda). ESTA
-VERSIÓN EN ESPAÑOL NO SE HA VALIDADO TODAVÍA con un corpus en español: las
-listas de palabras y los umbrales son una adaptación razonada, no una medida.
+Qué NO es:  un predictor de visualizaciones. Se probó contra 80 ganchos
+reales en español (los tres primeros segundos de los subtítulos automáticos
+de los 8 shorts con más y los 8 con menos vistas de cinco canales):
+distingue un gancho real de uno escrito a propósito para ser malo (AUC 0,85)
+y NO distingue los éxitos de un creador de sus fracasos (AUC 0,49, donde 0,50
+es tirar una moneda). La versión inglesa dio lo mismo: 0,83 y 0,56.
 Úsala para cazar saludos, preámbulos, ganchos sin nada concreto y ganchos que
 tardan cinco segundos en decirse. Para elegir entre dos ganchos decentes,
 fíate de la gráfica de retención, no de este script.
@@ -37,7 +37,8 @@ import re
 import statistics
 import sys
 
-SPS = 6.0                # sílabas por segundo al hablar a cámara. Ajústalo con --sps.
+SPS = 6.0                # sílabas por segundo al hablar a cámara (medido en 80 shorts:
+                         # mediana 6,3, la mitad central entre 5,7 y 6,9). Ajústalo con --sps.
 HOOK_SECONDS = 3.0
 
 WORD_RE = re.compile(r"[^\W_]+(?:[.,]\d+)*[%€$]?|[$€]\d[\d.,]*|[€$%]")

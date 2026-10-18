@@ -142,9 +142,9 @@ Informa de tres cosas y nada más:
 3. **Las filas sin clasificar.** Cada gancho que el clasificador no supo nombrar
    es ruido o una fórmula que aún no está en `hooks.json`. Léelos a mano. Es la
    columna más valiosa de la salida y por eso el script imprime el recuento. En
-   esta variante cuenta doble: las regex de `hooks.json` en español todavía no
-   se han contrastado con un corpus real, así que lo que salga aquí sirve para
-   corregirlas.
+   esta variante cuenta doble: las regex de `hooks.json` en español solo
+   nombran uno de cada cuatro ganchos que no se usaron para escribirlas, así
+   que lo que salga aquí sirve para corregirlas.
 
 Después di el tamaño de la muestra y la confianza con palabras normales.
 Cuarenta reels de seis cuentas sostienen una afirmación. Doce no, y decirlo es

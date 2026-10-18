@@ -138,11 +138,10 @@ Escríbelo aparte, siempre. Se lee antes de oírse.
 
 ## Una advertencia sobre la nota
 
-`hookscore.py` en español es una adaptación de la versión inglesa, que sí se
-midió contra 74 ganchos reales (caza bien los malos, apenas distingue entre
-dos buenos). **Esta versión no se ha validado todavía con ganchos en
-español.** Úsala para descartar saludos, preámbulos y ganchos sin nada
-concreto, y fíate de la gráfica de retención para lo demás.
+`hookscore.py` se midió contra 80 ganchos reales en español: caza bien los
+malos (AUC 0,85) y **no distingue los éxitos de un creador de sus fracasos**
+(AUC 0,49, una moneda al aire). Úsala para descartar saludos, preámbulos y
+ganchos sin nada concreto, y fíate de la gráfica de retención para lo demás.
 
 ## Ejemplo
 

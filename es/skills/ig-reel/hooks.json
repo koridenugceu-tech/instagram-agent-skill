@@ -1,6 +1,6 @@
 {
   "version": "1.0-es",
-  "note": "26 fórmulas de gancho para Reels en español. Un Reel tiene dos ganchos que se disparan a la vez y no son la misma frase: lo primero que dices y lo primero que sale en pantalla. El gancho hablado tiene unos dos segundos. El de pantalla, uno, porque se lee antes de oírse. Cada fórmula trae una plantilla, un ejemplo relleno, la versión en pantalla, para qué sirve y cómo se suele estropear. Cada una lleva también una regex `match`, para que el mismo vocabulario sirva para nombrar un gancho encontrado por ahí y no solo para escribir uno nuevo. Recórrelas en el orden de `classify_order`, de la más específica a la menos, sin distinguir mayúsculas. Estas regex están escritas para el español hablado pero, a diferencia de las inglesas, todavía no se han contrastado con un corpus de ganchos reales en español: si /ig-viral te deja muchos 'sin clasificar', corrígelas con esos casos.",
+  "note": "26 fórmulas de gancho para Reels en español. Un Reel tiene dos ganchos que se disparan a la vez y no son la misma frase: lo primero que dices y lo primero que sale en pantalla. El gancho hablado tiene unos dos segundos. El de pantalla, uno, porque se lee antes de oírse. Cada fórmula trae una plantilla, un ejemplo relleno, la versión en pantalla, para qué sirve y cómo se suele estropear. Cada una lleva también una regex `match`, para que el mismo vocabulario sirva para nombrar un gancho encontrado por ahí y no solo para escribir uno nuevo. Recórrelas en el orden de `classify_order`, de la más específica a la menos, sin distinguir mayúsculas. Estas regex se reescribieron contra 80 ganchos reales en español (los tres primeros segundos de los subtítulos automáticos de los 8 shorts con más y los 8 con menos vistas de cinco canales): las escritas a partir de plantillas nombraban el 12 %; reescritas, el 62 %. En 34 ganchos de los mismos canales que no se usaron para escribirlas, el 26 % (las de plantilla, el 6 %): la cifra que vale es la segunda. El resto se queda sin clasificar a propósito: si /ig-viral te deja muchos 'sin clasificar', corrígelas con esos casos.",
   "rules": [
     "Escribe la frase hablada y la de pantalla por separado. La de pantalla es la más corta y más directa: seis palabras o menos, sin signos que no necesite.",
     "Sin preparación. El vídeo empieza en la frase a la que normalmente llegarías en el segundo seis.",
@@ -68,7 +68,7 @@
       "on_screen": "60 DÍAS. NÚMEROS REALES.",
       "best_for": "Experimentos. Va con una grabación de pantalla del panel real, que es todo el valor.",
       "trap": "No enseñar la pantalla. Un vídeo de números sin grabación de pantalla es una afirmación sobre números.",
-      "match": "\\b\\w+(?:é|í)\\b[^.!?]{0,40}\\bdurante\\s+\\d+\\s+(?:días?|semanas?|meses|años?)\\b|\\b(?:estos|aquí tienes|aquí están) (?:son )?(?:los|mis) números\\b|\\bnúmeros reales\\b"
+      "match": "\\b\\w+(?:é|í)\\b[^.!?]{0,40}\\bdurante\\s+\\d+\\s+(?:días?|semanas?|meses|años?)\\b|\\b(?:estos|aquí tienes|aquí están) (?:son )?(?:los|mis) números\\b|\\bnúmeros reales\\b|\\bllevo\\s+[^\\W_]+\\s+(?:días|semanas|meses|años)\\s+sin\\b"
     },
     {
       "id": 7,
@@ -108,7 +108,7 @@
       "on_screen": "¿VISTAS PERO NO SEGUIDORES?",
       "best_for": "Filtrar fuerte. Se queda menos gente, y la que se queda es la que compra.",
       "trap": "Una situación tan amplia que no filtra a nadie. 'Si quieres crecer' no es una situación.",
-      "match": "^\\s*¿?si (?:tú|tu|tus|te|eres|tienes|llevas|estás|quieres|trabajas|vendes|cobras|yo|mi|mis)\\b"
+      "match": "^\\s*¿?si (?:tú|tu|tus|te|eres|tienes|llevas|estás|quieres|trabajas|vendes|cobras|yo|mi|mis)\\b|^\\s*¿?(?:te gustaría|os gustaría|quieres|queréis|necesitas)\\b"
     },
     {
       "id": 11,
@@ -148,7 +148,7 @@
       "on_screen": "FOTÓGRAFOS POR DEBAJO DE 2.000 €",
       "best_for": "Recortar un público amplio hasta el que convierte. Los envíos suben porque la gente se etiqueta.",
       "trap": "Un grupo tan grande que no es un aviso. 'Emprendedores' no es un grupo.",
-      "match": "^\\s*(?:tod[oa]s l[oa]s|cualquier)\\s+[^\\W\\d_]+|^\\s*[^\\W\\d_]*(?:ores|oras|istas|eros|eras|antes|entes|ógrafos|ógrafas)\\b[^!?:\\n]{0,45}[,:]|^\\s*(?:para (?:l[oa]s que|quien|quienes|tod[oa]s))\\b|^\\s*(?:atención|ojo)\\b"
+      "match": "^\\s*(?:tod[oa]s l[oa]s|cualquier)\\s+[^\\W\\d_]+|^\\s*[^\\W\\d_]{2,}(?:ores|oras|istas|eros|eras|antes|entes|ógrafos|ógrafas)\\b[^!?:\\n]{0,45}[,:]|^\\s*(?:para (?:l[oa]s que|quien|quienes|tod[oa]s))\\b|^\\s*(?:atención|ojo)\\b|\\b(?:va dirigido|va dedicado|es para) (?:a )?(?:la gente|l[oa]s|quien|quienes|tod[oa]s)\\b|\\bpara tod[oa]s l[oa]s [^\\W\\d_]+"
     },
     {
       "id": 15,
@@ -168,7 +168,7 @@
       "on_screen": "ME LO PREGUNTAN CADA SEMANA",
       "best_for": "Búsqueda. Una pregunta escrita como la escribe la gente es justo lo que busca el buscador de Instagram.",
       "trap": "Pulir la pregunta. El valor está en que son sus palabras, con erratas y todo.",
-      "match": "^\\s*[\\\"“'«]?¿?(?:cómo|como|qué|que|por qué|cuándo|dónde|quién|cuál|cuánto|cuánta|cuántos|se puede|puedo|debo|debería|es|hay|has|tienes|vale la pena)\\b[^?]{3,110}\\?"
+      "match": "^\\s*[\\\"“'«]?¿?(?:cómo|como|qué|que|por qué|cuándo|dónde|quién|cuál|cuánto|cuánta|cuántos|se puede|puedo|debo|debería|es|hay|has|tienes|vale la pena)\\b[^?]{3,110}\\?|^\\s*[\\\"“'«]?¿\\s*[^\\W\\d_]|^\\s*(?:a ver,?\\s+(?:una pregunta,?\\s+)?)?(?:cómo|por qué|cuándo|dónde|quién|cuál|cuánto|cuánta|cuántos|cuántas|qué (?:pasa|pasaría|pasó|harías|haces|hago|hacéis|hacer|es|son|significa|ocurre|ocurriría|sucede))\\b|^(?:[^\\W\\d_]+\\W+){0,8}?(?:por qué|qué pasaría si)\\b"
     },
     {
       "id": 17,
@@ -188,7 +188,7 @@
       "on_screen": "MIRA ESTO",
       "best_for": "Grabaciones de pantalla y cualquier cosa con un resultado visible. Sin preparación: la mano ya se está moviendo.",
       "trap": "Un resultado que tarda doce segundos en llegar. Si la recompensa es lenta, corta a ella y enseña la espera después.",
-      "match": "^\\s*(?:mira|mirad|mirá) (?:lo que|esto|cómo|como)\\b|^\\s*(?:déjame|dejadme) (?:enseñarte|enseñaros|mostrarte)\\b|^\\s*repite conmigo\\b"
+      "match": "^\\s*(?:mira|mirad|mirá),? (?:lo que|esto|cómo|como)\\b|^\\s*(?:déjame|dejadme) (?:enseñarte|enseñaros|mostrarte)\\b|^\\s*repite conmigo\\b"
     },
     {
       "id": 19,
@@ -228,7 +228,7 @@
       "on_screen": "QUIEN MUCHO ABARCA, MUCHO APRIETA",
       "best_for": "Comentarios. Quien mira tiene que pararse a comprobar si lo ha oído bien.",
       "trap": "Darle la vuelta a un refrán que nadie usa. El original tiene que ser un reflejo, o la inversión es solo una frase.",
-      "match": "^\\s*(?:quien|el que|la que|más vale|no por mucho|a quien|al que|en casa de|dime con quién)\\b"
+      "match": "^\\s*(?:quien|el que|la que|más vale|no por mucho|a quien|al que|en casa de|dime con quién)\\b|\\bme van a (?:funar|matar|odiar|crucificar|cancelar)\\b|\\bopinión impopular\\b|^\\s*(?:est[oa]s?|el|la|los|las) [^\\W\\d_]+ no (?:está|están|es|son) [^\\W\\d_]+"
     },
     {
       "id": 23,
@@ -238,7 +238,7 @@
       "on_screen": "EL 33 % NO VUELVE A LEER",
       "best_for": "Envíos. Una cifra que se puede repetir en una cena es una cifra que se reenvía.",
       "trap": "Una estadística sin fuente. Di de dónde sale en el vídeo o no la uses.",
-      "match": "^\\s*(?:el |un )?\\d[\\d.,]*\\s?%|\\b\\d[\\d.,]*\\s?%\\s+de\\b|\\b\\d+\\s+de cada\\s+\\d+\\b"
+      "match": "^\\s*(?:el |un )?\\d[\\d.,]*\\s?%|\\b\\d[\\d.,]*\\s?%\\s+de\\b|\\b\\d+\\s+de cada\\s+\\d+\\b|^\\s*en (?:un|una) (?:segundo|minuto|hora|día|semana|año)\\b|\\b\\d[\\d.,]*\\s+(?:mil )?millones\\b"
     },
     {
       "id": 24,
@@ -248,7 +248,7 @@
       "on_screen": "LA NUEVA",
       "best_for": "Cualquier cosa física o visual. El objeto es el gancho y las palabras son subtítulos encima.",
       "trap": "Enseñar la cosa sin decir qué cambia. Una presentación sin nada en juego es un anuncio.",
-      "match": "^\\s*(?:bueno,?\\s+|vale,?\\s+)?(?:este|esta|estos|estas) (?:es|son) (?:el|la|los|las|mi|mis) nuev[oa]s?\\b|^\\s*(?:este|esta) (?:nuev[oa]|pequeñ[oa]|diminut[oa])\\b|^\\s*(?:este|esta) [^\\W\\d_]+ tiene (?:el|la|un|una)\\b"
+      "match": "^\\s*(?:bueno,?\\s+|vale,?\\s+)?(?:este|esta|estos|estas) (?:es|son) (?:el|la|los|las|mi|mis) nuev[oa]s?\\b|^\\s*(?:este|esta) (?:nuev[oa]|pequeñ[oa]|diminut[oa])\\b|^\\s*(?:este|esta) [^\\W\\d_]+ tiene (?:el|la|un|una)\\b|^\\s*(?:mirad?,?\\s+)?(?:esto|esta|este|estos|estas)(?: que ves| (?:vídeo|video))?(?: de)? aquí\\b|^\\s*(?:esto|esta|este|estos|estas) (?:es|son) (?:el|la|los|las|una?|dos|tres) [^\\W\\d_]+|^\\s*(?:nuev[oa]s?|ya (?:puedes|podéis|está|están)|ha salido|han salido|acaba(?:n)? de (?:salir|lanzar|presentar)|han vuelto|vuelve[n]?)\\b"
     },
     {
       "id": 25,
@@ -258,7 +258,7 @@
       "on_screen": "1M DE SUSCRIPTORES EN UN MES",
       "best_for": "Prueba cuando aún no tienes tu propia cifra. La tercera persona vale si es verdad.",
       "trap": "Sin nombre y sin enlace. Un milagro anónimo es un rumor.",
-      "match": "\\bhubo (?:un|una)\\b|\\bhay (?:un|una) (?:chico|chica|creador|creadora|alumno|alumna|cliente|clienta|amigo|amiga|tío|tía)\\b|\\b(?:un|una) (?:chico|chica|creador|creadora|alumno|alumna|fundador|fundadora|cliente|clienta|amigo|amiga) (?:que conozco |que |de )\\w*(?:ó|ió)\\b"
+      "match": "\\bhubo (?:un|una)\\b|\\bhay (?:un|una) (?:chico|chica|creador|creadora|alumno|alumna|cliente|clienta|amigo|amiga|tío|tía)\\b|\\b(?:un|una) (?:chico|chica|creador|creadora|alumno|alumna|fundador|fundadora|cliente|clienta|amigo|amiga) (?:que conozco |que |de )\\w*(?:ó|ió)\\b|\\b(?:esta|este) (?:chica|chico|mujer|hombre|señor|señora|influencer|empresa|marca|persona|pareja|niña|niño|paciente|creador|creadora)\\b|\\b(?:la|el) (?:empresa|marca|influencer|youtuber|tiktoker)\\b|\\bhay (?:gente|personas|una persona) que\\b"
     },
     {
       "id": 26,
@@ -268,7 +268,7 @@
       "on_screen": "LA FORMA MÁS RÁPIDA",
       "best_for": "Vídeos de una sola afirmación sin historia detrás. Es la forma más común y la más fácil de escribir mal.",
       "trap": "Un superlativo con una respuesta blanda. Si la segunda mitad es 'la constancia', no has dicho nada y te lo dirán.",
-      "match": "^\\s*(?:la|el|lo)\\s+(?:forma|manera|modo|truco|error|cosa)\\s+(?:más\\s+\\w+|mejor|peor|única)\\b|^\\s*(?:lo|la|el)\\s+(?:mejor|peor|único|única|más importante)\\b|\\bla (?:mejor|peor|única) (?:forma|manera) de\\b"
+      "match": "^\\s*(?:la|el|lo)\\s+(?:forma|manera|modo|truco|error|cosa)\\s+(?:más\\s+\\w+|mejor|peor|única)\\b|^\\s*(?:lo|la|el)\\s+(?:mejor|peor|único|única|más importante)\\b|\\bla (?:mejor|peor|única) (?:forma|manera) de\\b|\\bun[oa] de (?:los|las) (?:[^\\W\\d_]+ ){0,3}(?:más|mejores|peores)\\b|\\b(?:el|la|los|las) (?:[^\\W\\d_]+ ){1,4}(?<!mucho )(?<!muy )más (?!que\\b)[^\\W\\d_]{4,}"
     }
   ],
   "classify_order": [

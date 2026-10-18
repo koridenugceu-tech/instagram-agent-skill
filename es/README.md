@@ -230,26 +230,69 @@ REFERENCIAS  ·  4 reels  ·  4 cuentas  ·  referencia: mediana de la cuenta
            "en este vídeo te voy a enseñar mi rutina de mañana"
 ```
 
-## Lo que no está medido, que es lo importante
+## Lo que está medido y lo que no, que es lo importante
 
-El README inglés cuenta cómo se probó el puntuador de ganchos contra 74 ganchos
-reales: caza bien los malos (AUC 0,83) y apenas distingue entre dos buenos
-(AUC 0,56, casi tirar una moneda). **Nada de eso se ha medido en español.**
+Repetí en español la medición del README inglés. El corpus son **80 ganchos
+reales**: los tres primeros segundos de los subtítulos automáticos (`es-orig`,
+el reconocimiento de voz original, no una traducción) de los 8 shorts con más
+y los 8 con menos vistas de cinco canales: Euge Oller (negocios), Farmacéutico
+Fernández (salud), QuantumFracture (ciencia), La Hiperactina (biología) y
+Xavier Mitjana (IA). Las vistas van de 281 a 31 millones. Son YouTube Shorts y
+no Reels por la misma razón que en inglés: Instagram no da las vistas sin
+entrar en la cuenta de otro.
 
-- Las listas de palabras, los umbrales y los pesos de `hookscore.py` y
-  `detect.py` son una adaptación razonada del original, probada con ejemplos
-  escritos a mano, no contra un corpus.
-- Las regex de `hooks.json` reconocen los 26 ejemplos de las propias fórmulas.
-  En inglés, las regex escritas a partir de plantillas solo nombraban el 8 % de
-  los ganchos reales hasta que se reescribieron con habla transcrita. Lo más
-  probable es que aquí pase algo parecido. Si `/ig-viral` te deja muchos "sin
-  clasificar", son justo los casos con los que corregirlas.
-- El ritmo de 6 sílabas por segundo es una estimación para alguien hablando a
-  cámara. Mídete y pásalo con `--sps`.
+**1. Caza bien los ganchos malos.** Contra diez ganchos escritos a propósito
+para ser malos (saludos, "en este vídeo te voy a enseñar", "bueno, pues hoy os
+quería hablar"), **AUC 0,85**, y nueve de los diez quedan por debajo de la
+mediana del corpus real. En inglés, 0,83.
 
-Si alguien repite la medición del original con ganchos en español (los
-subtítulos automáticos de YouTube Shorts en `es.*` sirven, el método está en
-[`/ig-viral`](skills/ig-viral/SKILL.md)), ese es el siguiente paso.
+**2. No elige ganadores.** Separando los éxitos de un creador de sus fracasos,
+**AUC 0,49: una moneda al aire**. Canal a canal va de 0,38 a 0,67, y con 34
+ganchos más de los mismos canales, 0,58. En inglés, 0,56. De las cinco
+comprobaciones, solo CONCRECIÓN tiene medianas distintas (45 arriba, 15
+abajo), y aun así su AUC es 0,53. TENSIÓN da 20 de mediana en los éxitos, en
+los fracasos y en los ganchos malos: en este corpus no mide nada. Y
+DESTINATARIO va al revés (AUC 0,36): los fracasos le hablan más a quien mira,
+sobre todo con "¿quieres...?" de vídeo patrocinado.
+
+**3. El clasificador de fórmulas estaba roto, como en inglés.** Las regex de
+`hooks.json`, escritas a partir de las plantillas, nombraban el **12 %** de los
+ganchos reales. Reescritas con esos casos, el 62 %, pero eso es contra los
+mismos ganchos con los que se escribieron. **Contra 34 ganchos que no se
+usaron para escribirlas, nombran el 26 %** (las de plantilla, el 6 %). Esa es
+la cifra que vale. Lo que faltaba:
+
+- La Presentación no reconocía la apertura más común en divulgación: "esto que
+  ves aquí son...", "esta de aquí es un bazo", y tampoco "nueva herramienta
+  gratis de Google" ni "ya puedes...".
+- La Pregunta literal exigía el signo de cierre, y los subtítulos automáticos
+  casi nunca lo ponen: "qué pasaría si pusieras la mano dentro de un
+  acelerador" no contaba.
+- El Resultado de otro no veía "esta chica no pudo vender ni 36 camisetas" ni
+  "hay gente que...". El Superlativo no veía "una de las fuerzas más
+  poderosas".
+- Un fallo: El aviso a un grupo tomaba "Antes de empezar, dale a like" por un
+  aviso a "-antes", como "estudiantes".
+
+**Lo que no cambié en `hookscore.py`, porque no hay evidencia:** probé a quitar
+"esto es" de las aperturas flojas, ya que tantos éxitos de divulgación empiezan
+así, y el AUC pasó de 0,49 a 0,50. Nada. El ritmo de habla medido en los 80
+shorts es de 6,3 sílabas por segundo de mediana (la mitad central, entre 5,7 y
+6,9), así que el 6 por defecto se queda.
+
+**Lo que sigue sin medir:**
+
+- `detect.py`, el detector de texto de IA, no se ha probado contra un corpus en
+  español.
+- Los subtítulos automáticos no llevan mayúsculas y destrozan cifras ("1,000€n
+  de€"), así que CONCRECIÓN infravalora los ganchos transcritos. Con lo que tú
+  escribes no pasa.
+- 80 ganchos de cinco canales sostienen "caza los malos" y "no elige
+  ganadores". No sostienen nada más fino.
+
+Si lo repites con un corpus mayor y te sale otra cosa, prefiero saberlo. El
+script de medición no está en el repo porque depende de `yt-dlp`, pero el
+método está en [`/ig-viral`](skills/ig-viral/SKILL.md).
 
 ## La letra pequeña
 

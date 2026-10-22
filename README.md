@@ -1,5 +1,10 @@
 # The Instagram agent skill
 
+> **¿En español?** Este fork añade una variante en español del pack, adaptada
+> por dentro (fórmulas de gancho, léxico del humanizador, detector y scripts) y
+> medida contra textos reales: [es/README.md](es/README.md). El pack original
+> es de Jake Schincariol: [Jakeschincariol/instagram-agent-skill](https://github.com/Jakeschincariol/instagram-agent-skill).
+
 Thirteen Claude skills that run an Instagram account. Free, MIT, no signup, no
 API key, nothing to connect.
 

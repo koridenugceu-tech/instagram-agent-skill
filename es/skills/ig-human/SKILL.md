@@ -136,9 +136,14 @@ afirmación. No hagas una mayor en nombre del usuario y no le digas nunca que su
 texto es indetectable.
 
 Y una más, propia de esta variante: **los umbrales vienen de la versión
-inglesa y no se han recalibrado con textos en español.** Funcionan para
-separar un borrador lleno de relleno de uno escrito por una persona, pero las
-cifras exactas son una adaptación, no una medida.
+inglesa y, medidos con textos en español, separan a medias.** Contra 36
+descripciones de YouTube escritas por personas antes de 2022 y 180 generadas
+con el mismo encargo por cinco modelos, la nota da AUC 0,75. La IA sale
+MARCADO el 77 % de las veces, pero las personas también, el 42 %, y solo 1
+de los 36 textos humanos sale APTO. El detalle está en el README. Úsalo para encontrar qué
+arreglar (la comprobación más floja, las palabras que lista), no como prueba
+de que un texto parece humano, y no le digas al usuario que su texto "suena a
+IA" por un MARCADO.
 
 ## Orden de trabajo
 
@@ -146,7 +151,8 @@ cifras exactas son una adaptación, no una medida.
 2. Lee las señales estructurales. Reescribe tú esas líneas.
 3. `detect.py borrador.txt limpio.txt` para enseñar el antes y el después.
 4. Si el veredicto no es APTO, arregla la comprobación más floja que diga la
-   salida y repite. Dos rondas es lo normal. Cinco significa que el borrador
-   se escribió por fórmula, y lo que hace falta es otro borrador, no más
-   pasadas.
+   salida y repite. Dos rondas como mucho: casi ningún texto humano llega a
+   APTO, así que perseguirlo solo deforma el borrador. Si tras dos rondas
+   sigue lleno de relleno, se escribió por fórmula, y lo que hace falta es
+   otro borrador, no más pasadas.
 5. Enseña al usuario el texto limpio y la nota. Nunca la nota sola.

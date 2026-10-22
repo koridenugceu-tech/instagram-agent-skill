@@ -19,14 +19,14 @@ publicas.
 Como plugin, en Claude Code:
 
 ```
-/plugin marketplace add Jakeschincariol/instagram-agent-skill
+/plugin marketplace add koridenugceu-tech/instagram-agent-skill
 /plugin install instagram-agent-es
 ```
 
 O a mano:
 
 ```bash
-git clone https://github.com/Jakeschincariol/instagram-agent-skill.git
+git clone https://github.com/koridenugceu-tech/instagram-agent-skill.git
 cp -r instagram-agent-skill/es/skills/ig-* ~/.claude/skills/
 ```
 
@@ -280,10 +280,67 @@ así, y el AUC pasó de 0,49 a 0,50. Nada. El ritmo de habla medido en los 80
 shorts es de 6,3 sílabas por segundo de mediana (la mitad central, entre 5,7 y
 6,9), así que el 6 por defecto se queda.
 
+**4. El detector de texto de IA distingue algo, pero casi nunca aprueba a una
+persona.** El README inglés no mide `detect.py`, así que esta es su primera
+medición. Lado humano: 36 descripciones de YouTube publicadas antes de
+diciembre de 2022, es decir, antes de ChatGPT, por nueve canales (Academia
+Play, CdeCiencia, Date un Vlog, Euge Oller, Jaime Altozano, La Gata de
+Schrödinger, La Hiperactina, Nate Gentile y Un Mundo Inmenso). Solo el cuerpo,
+sin enlaces ni firmas, con una mediana de 70 palabras, el largo de un caption.
+Lado IA: el mismo encargo para cada vídeo ("Escribe la descripción para
+YouTube del vídeo «título» del canal X, unas N palabras, sin enlaces ni
+hashtags"), una petición independiente por texto a través de OpenRouter, a
+cinco modelos: GPT 6.1, Gemini 4, Grok 4.7, DeepSeek v4.1 y Mistral Large 4.
+Son 180 textos y ningún modelo había visto el detector.
+
+- **AUC 0,75** con los cinco juntos. Por modelo, de 0,71 (Grok) a 0,79
+  (DeepSeek). Antes del cambio de abajo era 0,71. Gemini pedido a mano, en
+  dos bloques de 18 encargos en el mismo chat, da 0,72: coherente.
+- **El veredicto separa a medias.** IA: APTO 1 de 180, REVISAR 22 %, MARCADO
+  77 %. Humanos: APTO 1 de 36 (3 %), REVISAR 56 %, **MARCADO 42 %**. Un
+  MARCADO es más probable en un texto de máquina, pero le pasa a casi la
+  mitad de las personas, y el APTO no lo alcanza casi nadie.
+- Por comprobación, AUC: VOZ 0,69, VARIACIÓN 0,68, RELLENO 0,64, CONCRECIÓN
+  0,62 y HUELLA 0,49. HUELLA no mide nada aquí: ningún texto de ninguno de los
+  dos lados traía rayas ni comillas tipográficas. VOZ castiga a los humanos
+  divulgativos (37 de mediana) por escribir en tercera persona y sin
+  coletillas; separa porque a la IA la castiga más (25).
+- La señal más clara ya estaba en `slop.json`: el preámbulo "en este vídeo"
+  sale en 115 de los 180 textos de IA y en 11 de los 36 humanos. La tríada no
+  separa: 6 % de los textos de IA y 8 % de los humanos.
+- `humanize.py` cambió 65 de los 180 textos de IA y subió su nota 6,5 puntos
+  de media. De esos 65, los MARCADO bajaron de 56 a 45, y ninguno llegó a
+  APTO. Uno de sus cambios, "descubre cómo" -> "mira cómo", le regala unos 4
+  puntos de VOZ, porque el detector cuenta "mira" como coloquial: el
+  humanizador se puntúa a sí mismo. Es poco y queda anotado.
+
+**Lo que cambié en `slop.json`, y con qué evidencia:** dos estructuras nuevas,
+sacadas de una primera tanda de 36 textos que escribí yo (Claude Opus 5.5)
+antes de tener los de los otros cinco modelos. "Descubre", "descubrirás" y
+"descubriremos" salen en 80 de los 180 textos de esos modelos y en ningún
+humano. El índice en primera del plural ("veremos", "exploramos",
+"analizamos") sale en 80 de 180 y en 2 de 36 humanos. Juntas suben el AUC de
+0,71 a 0,75, y lo suben en los cinco modelos, sin marcar a ningún humano más.
+Eso es validarlas fuera de la muestra en que se escribieron. Mis 36 textos,
+que se escribieron después de leer `detect.py`, eran los más difíciles: AUC
+0,62 antes del cambio y 0,66 después.
+
+**Lo que no cambié, porque no hay evidencia:** quitar la tríada sube el AUC
+0,002. Que una comprobación "demasiado corta para juzgar" valga 50 le cierra
+el APTO a 13 de los 36 humanos, pero sacarla del cálculo deja 2 humanos APTO
+frente a 1 de la IA. No arregla nada.
+
+Los límites pesan. El género es la descripción divulgativa de YouTube, no el
+caption personal de Instagram: en captions en primera persona, VOZ puede
+portarse distinto, y "veremos" o "descubre" quizá salgan menos. Y 36 textos
+humanos son pocos. Lo que sí sostiene es esto: sirve para ver qué arreglar (la
+comprobación más floja, las palabras que lista), no para dictaminar si un
+texto parece humano.
+
 **Lo que sigue sin medir:**
 
-- `detect.py`, el detector de texto de IA, no se ha probado contra un corpus en
-  español.
+- `detect.py` con captions de Instagram en primera persona escritos por
+  personas.
 - Los subtítulos automáticos no llevan mayúsculas y destrozan cifras ("1,000€n
   de€"), así que CONCRECIÓN infravalora los ganchos transcritos. Con lo que tú
   escribes no pasa.
@@ -334,8 +391,12 @@ templates/voice.md                 tu perfil de voz, con variante y trato. Rell�
 
 ## Créditos
 
-Pack original de Jake Schincariol, [opusjake.ai](https://opusjake.ai). Variante
-en español adaptada a partir de él.
+Pack original de **Jake Schincariol**, [opusjake.ai](https://opusjake.ai), en
+[Jakeschincariol/instagram-agent-skill](https://github.com/Jakeschincariol/instagram-agent-skill),
+con licencia MIT. Las skills, su diseño y el pack en inglés son suyos.
+
+Variante en español adaptada a partir de él por
+[koridenugceu-tech](https://github.com/koridenugceu-tech), en este fork.
 
 ## Licencia
 

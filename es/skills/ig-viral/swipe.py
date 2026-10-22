@@ -36,13 +36,17 @@ import statistics
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-HOOKS = os.path.join(HERE, "..", "ig-reel", "hooks.json")
+# Junto a ig-reel en la misma carpeta de skills, o con su propia copia de
+# hooks.json y hookscore.py cuando se sube suelta (por ejemplo, a claude.ai).
+HOOKS = next((p for p in (os.path.join(HERE, "hooks.json"),
+                          os.path.join(HERE, "..", "ig-reel", "hooks.json"))
+              if os.path.exists(p)), os.path.join(HERE, "..", "ig-reel", "hooks.json"))
 WORD_RE = re.compile(r"[^\W_]+(?:[.,]\d+)*[%€$]?|[$€]\d[\d.,]*")
 COLUMNS = {"cuenta": "account", "seguidores": "followers", "mediana": "median",
            "vistas": "views", "visualizaciones": "views", "gancho": "hook"}
 
 try:                                              # opcional: puntuar también los ganchos
-    sys.path.insert(0, os.path.join(HERE, "..", "ig-reel"))
+    sys.path[:0] = [HERE, os.path.join(HERE, "..", "ig-reel")]
     from hookscore import run as score_hook       # noqa: E402
 except Exception:                                 # ig-viral copiado por separado
     score_hook = None

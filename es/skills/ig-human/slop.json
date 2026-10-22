@@ -1603,6 +1603,18 @@
       "regex": "(?m)^\\s*(?:[A-ZÁÉÍÓÚÑ][a-záéíóúñü]+\\s+){3,}[A-ZÁÉÍÓÚÑ][a-záéíóúñü]+",
       "name": "Mayúsculas a la inglesa (\"Cómo Escribir Un Caption Que Vende\")",
       "fix": "En español solo va en mayúscula la primera palabra y los nombres propios. Esto huele a traducción."
+    },
+    {
+      "id": "descubre",
+      "regex": "(?i)\\bdescubr(?:e(?!\\s+c[oó]mo)|irás|iremos|imos)\\b",
+      "name": "Promesa de descubrimiento (\"descubre\", \"descubrirás\")",
+      "fix": "Di lo que hay que descubrir. Medido: sale en el 44 % de los textos de cinco modelos y en ningún texto humano del corpus."
+    },
+    {
+      "id": "temario",
+      "regex": "(?i)\\b(?:analizamos|analizaremos|repasamos|exploramos|exploraremos|veremos|hablaremos)\\b",
+      "name": "Índice en primera del plural (\"veremos\", \"exploramos\")",
+      "fix": "No anuncies el temario. Cuenta lo primero que hay que saber."
     }
   ]
 }
